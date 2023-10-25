@@ -1,0 +1,78 @@
+<%- include ('../../partials/header') %>
+<%- include ('../../partials/adminNavBar') %>
+<body>    
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Detalhes da venda</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p id="clienteNome">Cliente: </p>
+            <p id="dataVenda">Data: </p>
+            <table class="table" id="produtosTable">
+              <thead>
+                <tr>
+                  <th>Produtos comprados</th>
+                  <th>Quantidade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Aqui serão inseridas as linhas da tabela de produtos -->
+              </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <h2 class="mb-3">Vendas</h2>
+    <a href="/admin/sales/new" class="btn btn-success mb-3 ">Cadastrar Venda</a>
+    <table class="table table-striped table-bordered ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome do cliente</th>
+                <th>Valor da venda</th>
+                <th>Data</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% sales.forEach(sale=> { %>
+                <tr>
+                    <td>
+                        <%= sale.id %>
+                    </td>
+                    <td>
+                        <%= sale.cliente.nome %>
+                    </td>
+                    <td>
+                        <%= sale.preco_venda %>
+                    </td>
+                    <td>
+                        <%= sale.data %>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary abrir-modal" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-venda-id="<%= sale.id %>">
+                                Detalhes
+                        </button>
+                        <!-- <a href="/admin/sale/<%= sale.id %>" class="btn btn-primary" >
+                            Detalhes
+                        </a> -->
+                        
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="/js/modal.js"></script>

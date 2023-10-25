@@ -1,0 +1,58 @@
+<%- include ('../../partials/header') %>
+  <%- include ('../../partials/adminNavBar') %>
+
+    <div class="container ">
+      <h2 class="m-4 ">Cadastro de Venda</h2>
+      <form class="m-4 " action="/admin/sale/save" method="post">
+        <div class="form-group">
+          <label for="nome_cliente">Nome do Cliente</label>
+          <select id="nome_cliente" name="cliente" class="form-control">
+            <option selected>Selecione um Cliente</option>
+            <% clients.forEach(client=> { %>
+              <option value="<%= client.id %>">
+                <%= client.nome %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="preco_venda">Preco venda</label>
+          <input type="number" class="form-control" id="preco_venda" name="preco_venda" placeholder="Valor da compra">
+        </div>
+        <div class="w-100 d-flex flex-column" id="produtos">
+          <div class="d-flex w-100" id="produto">
+            <div class="form-group flex-grow-1">
+              <label>Produto</label>
+              <select class="form-control" name="produtos" id="produtos">
+                <% products.forEach(prod=> { %>
+                  <option value="<%= prod.id %>">
+                    <%= prod.nome_produto %>
+                  </option>
+                  <% }) %>
+              </select>
+            </div>
+            <div class="ms-4">
+              <div class="form-group">
+                <label for="quantidades">Quantidade</label>
+                <input type="number" class="form-control" name="quantidades" id="quantidades" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary d-block" id="btnAddItem">Adicionar</button>
+        <button type="submit" class="btn btn-success ">Cadastrar produto</button>
+        <a href="/admin/products" class="btn btn-danger ">Cancelar</a>
+      </form>
+
+      <script>
+        document.getElementById('btnAddItem').addEventListener('click', function () {
+          const produto = document.getElementById('produto');
+          const produtos = document.getElementById('produtos');
+          const duplicate = produto.cloneNode(true);
+          produtos.appendChild(duplicate)
+
+        });
+      </script>
+    </div>
+
+    <%- include ('../../partials/footer') %>

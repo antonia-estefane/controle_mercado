@@ -1,0 +1,23 @@
+<%- include ('../../partials/header') %> 
+<%- include ('../../partials/adminNavBar') %> 
+
+<div class="container">
+    <h2>Detalhes da venda</h2>
+
+    cliente: <%= sales.cliente.nome %> <br>
+    data: <%= sales.data %>
+    <table>
+        <tr>
+            <th>Produtos comprados</th>
+            <th>Quantidade</th>
+        </tr>
+        <% itens.forEach(item => { %>
+        <tr>
+            <td><%= item.produto.nome_produto %></td>
+            <td><%= item.quantity %></td>
+        </tr>
+        <% }) %>
+    </table>
+</div>
+
+<%- include ('../../partials/footer') %> 
