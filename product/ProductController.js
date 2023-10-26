@@ -9,26 +9,29 @@ router.get('/admin/products/new', (req, res) => {
 })
 
 router.post('/products/save', (req, res) => {
-    let nome_produto = req.body.nome_produto
-    let preco_venda = req.body.preco_venda
-    let preco_custo = req.body.preco_custo
-    let qtd_estoque = req.body.qtd_estoque
-    let categoria = req.body.categoria
-    let fornecedor = req.body.fornecedor
+    let {
+        nome_produto,
+        preco_venda,
+        preco_custo,
+        qtd_estoque,
+        categoria,
+        fornecedor,
+        foto
+    } = req.body;
 
     if (nome_produto != undefined) {
         Product.create({
-            nome_produto: nome_produto,
             slug: slugify(nome_produto),
-            preco_venda: preco_venda,
-            preco_custo: preco_custo,
-            qtd_estoque: qtd_estoque,
-            categoria: categoria,
-            fornecedor: fornecedor
+            nome_produto,
+            preco_venda,
+            preco_custo,
+            qtd_estoque,
+            categoria,
+            fornecedor,
+            foto
         }).then(() => res.redirect('/admin/products'))
     } else {
-        res.send(`error
-        `)
+        res.send(`error`)
     }
 })
 

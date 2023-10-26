@@ -29,6 +29,10 @@ const Product = connection.define('produtos', {
     fornecedor: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    foto: {
+        type: Sequelize.TEXT('medium'),
+        allowNull: false
     }
        
 });

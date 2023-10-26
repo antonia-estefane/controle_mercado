@@ -1,45 +1,81 @@
-<%- include ('../../partials/header') %> 
-<%- include ('../../partials/adminNavBar') %> 
+<%- include ('../../partials/header') %>
+  <%- include ('../../partials/adminNavBar') %>
 
-<div class="container ">
-    <h2 class="m-4 ">Cadastro de Produto</h2>
-    <form class="m-4 " action="/products/save" method="post">
+    <div class="container ">
+      <h2 class="m-4 ">Cadastro de Produto</h2>
+      <form class="m-4 " action="/products/save" method="post">
         <div class="form-group">
           <label for="nome_produto">Nome do Produto</label>
           <input type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Nome do produto">
         </div>
         <div class="row">
-            <div class="col">
-              <label for="preco_venda">Preço de venda</label>
-              <input type="number" min="0.1" step="1.0" class="form-control" placeholder="Preço de venda" id="preco_venda" name="preco_venda">
-            </div>
-            <div class="col">
-                <label for="preco_custo">Preço de custo</label>
-                <input type="number" min="0.1" step="1.0" class="form-control" placeholder="Preço de custo"  id="preco_custo" name="preco_custo">
-            </div>
+          <div class="col">
+            <label for="preco_venda">Preço de venda</label>
+            <input type="number" min="0.1" step="1.0" class="form-control" placeholder="Preço de venda" id="preco_venda"
+              name="preco_venda">
+          </div>
+          <div class="col">
+            <label for="preco_custo">Preço de custo</label>
+            <input type="number" min="0.1" step="1.0" class="form-control" placeholder="Preço de custo" id="preco_custo"
+              name="preco_custo">
+          </div>
         </div>
         <div class="row">
-            <div class="col">
-              <label for="qtd_estoque">Quantidade em estoque</label>
-              <input type="number" class="form-control" placeholder="Ex: 356" id="qtd_estoque" name="qtd_estoque">
-            </div>
-            <div class="col">
-                <label for="categoria">Categoria</label>
-                <!-- <select id="categoria" name="categoria" class="form-control">
+          <div class="col">
+            <label for="qtd_estoque">Quantidade em estoque</label>
+            <input type="number" class="form-control" placeholder="Ex: 356" id="qtd_estoque" name="qtd_estoque">
+          </div>
+          <div class="col">
+            <label for="categoria">Categoria</label>
+            <!-- <select id="categoria" name="categoria" class="form-control">
                     <option selected>Escolher...</option>
                     <option>...</option>
                 </select> -->
             <input type="text" class="form-control" id="categoria" name="categoria" placeholder="categoria">
 
-            </div>
           </div>
+          <div class="col">
+            <label for="arquivo">Foto</label>
+            <input type="file" id="arquivo" name="arquivo" accept=".png,.jpg,.jpeg">
+            <input type="hidden" id="foto" name="foto">
+            <div class="progress d-none" id="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+            </div>            
+          </div>
+        </div>
         <div class="form-group">
           <label for="fornecedor">Fornecedor</label>
           <input type="text" class="form-control" id="fornecedor" name="fornecedor" placeholder="Fornecedor">
         </div>
         <button type="submit" class="btn btn-success ">Cadastrar produto</button>
-        <a href="/admin/products" class="btn btn-danger ">Cancelar</a> 
+        <a href="/admin/products" class="btn btn-danger ">Cancelar</a>
       </form>
-</div>
 
-<%- include ('../../partials/footer') %> 
+      <script>
+
+        function getFileBase64(file, callback) {
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const base64Photo = e.target.result;
+              callback(base64Photo);
+            };
+            reader.readAsDataURL(file);
+          }
+        }
+
+        document.getElementById("arquivo").addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          const elemProgress = document.getElementById("progress");
+          elemProgress.classList.remove('d-none');
+          getFileBase64(file, (foto => {
+            elemProgress.classList.add('d-none');
+            const elemFoto = document.getElementById("foto")
+            elemFoto.value = foto;
+          }))
+        })
+
+      </script>
+    </div>
+
+    <%- include ('../../partials/footer') %>

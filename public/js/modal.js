@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const clienteElement = document.querySelector('#clienteNome');
             const dataElement = document.querySelector('#dataVenda');
             const produtosTable = document.querySelector('#produtosTable');
+            const precoTotal = document.querySelector('#precoTotal');
   
             // Preencher os elementos na modal com os dados retornados
-            clienteElement.innerHTML = `Cliente: ${data.sales.cliente.nome}`;
-            dataElement.innerHTML = `Data: ${data.sales.data}`;
+            dataElement.innerHTML = `<strong>Data:</strong> ${data.sales.data}`;
+            clienteElement.innerHTML = `<strong>Cliente:</strong> ${data.sales.cliente.nome}`;
   
             // Limpar a tabela de produtos
             produtosTable.innerHTML = `
@@ -30,16 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
   
             // Adicionar linhas à tabela para os produtos comprados
             data.itens.forEach(item => {
-              produtosTable.innerHTML += `
+              if(item.saleId == vendaId) {
+                console.log(item)
+                produtosTable.innerHTML += `
                 <tr>
                   <td>${item.produto.nome_produto}</td>
                   <td>${item.quantity}</td>
                 </tr>
               `;
+              }
             });
-  
+            
+            precoTotal.innerHTML = `<strong>Total:</strong> R$ ${data.sales. preco_venda}`;
+
             // Abrir a modal
-            $('#detalhesModal').modal('show');
+            document.getElementById('detalhesModal').modal('show');
           })
           .catch(error => {
             console.error('Erro ao obter detalhes da venda', error);
