@@ -1,0 +1,18 @@
+<%- include('../../partials/header.ejs') %>
+    <%- include ('../../partials/adminNavBar') %>
+    <div class="container">
+        <form action="/categories/update" method="post">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Defina o novo título da categoria:</label>
+          <input type="text" class="form-control" id="nome" placeholder="Informe a categoria aqui"
+          name="nome" value="<%= category.nome %>" >
+          <input type="hidden" name="id" value="<%= category.id %>" />
+        </div>
+    
+    
+          <button type="submit" class="btn btn-success ">Atualizar</button>
+          <a href="/admin/categories" class="btn btn-danger ">Cancelar</a>
+      </div>
+    </form>
+
+  <%- include('../../partials/footer.ejs') %>

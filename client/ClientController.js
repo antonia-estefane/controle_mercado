@@ -3,9 +3,10 @@ const express = require('express')
 const router = express.Router()
 const Client = require('./Client')
 const slugify = require('slugify')
+const adminAuth = require('../middlewares/adminAuth')
 
 
-router.get('/admin/clients/new', (req, res) => {
+router.get('/admin/clients/new', adminAuth, (req, res) => {
     res.render('admin/clients/new')
 })
 
@@ -38,7 +39,7 @@ router.post('/clients/delete', (req, res) => {
     }
 })
 
-router.get('/admin/clients/edit/:id', (req, res) => {
+router.get('/admin/clients/edit/:id', adminAuth, (req, res) => {
     let id = req.params.id
 
     if(isNaN(id)) {res.redirect('/admin/clients')}
@@ -71,7 +72,7 @@ router.post('/clients/update', (req, res) => {
     ).then(() => res.redirect('/admin/clients'))
 })
 
-router.get('/admin/clients', (req, res) => {
+router.get('/admin/clients', adminAuth, (req, res) => {
     Client.findAll().then(clients => {
         res.render('admin/clients/index', {clients})
     })

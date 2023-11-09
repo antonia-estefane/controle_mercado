@@ -2,10 +2,15 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const router = express.Router()
 const Product = require('./Product')
+const Category = require('../categories/Category')
 const slugify = require('slugify')
+const adminAuth = require('../middlewares/adminAuth')
 
-router.get('/admin/products/new', (req, res) => {
-    res.render('admin/products/new')
+
+router.get('/admin/products/new', adminAuth, (req, res) => {
+    Category.findAll().then(categories => {
+        res.render('admin/products/new', { categories })
+    })
 })
 
 router.post('/products/save', (req, res) => {
@@ -14,7 +19,7 @@ router.post('/products/save', (req, res) => {
         preco_venda,
         preco_custo,
         qtd_estoque,
-        categoria,
+        categoriaId,
         fornecedor,
         foto
     } = req.body;
@@ -26,7 +31,7 @@ router.post('/products/save', (req, res) => {
             preco_venda,
             preco_custo,
             qtd_estoque,
-            categoria,
+            categoriaId,
             fornecedor,
             foto
         }).then(() => res.redirect('/admin/products'))
@@ -35,8 +40,11 @@ router.post('/products/save', (req, res) => {
     }
 })
 
-router.get('/admin/products', (req, res) => {
-    Product.findAll().then(products => {
+router.get('/admin/products', adminAuth, (req, res) => {
+    Product.findAll({
+        order: [['id', 'DESC']],
+        include: [{ model: Category }]
+      }).then(products => {
         res.render('admin/products/index', {products})
     })
 })
@@ -59,7 +67,7 @@ router.post('/products/delete', (req, res) => {
     }
 })
 
-router.get('/admin/products/edit/:id', (req, res) => {
+router.get('/admin/products/edit/:id', adminAuth, (req, res) => {
     let id = req.params.id
 
     if(isNaN(id)) {res.redirect('/admin/products')}

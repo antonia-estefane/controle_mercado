@@ -7,24 +7,24 @@ const Item = require("../item/Item");
 const slugify = require("slugify");
 const Sale = require("./Sale");
 const format = require('date-fns/format');
+const adminAuth = require('../middlewares/adminAuth')
 
 
-router.get("/admin/sales", async (req, res) => {
+router.get("/admin/sales", adminAuth, async (req, res) => {
     const sales = await Sale.findAll({ 
-      order: [['id', 'DESC']],
       include: [{ model: Client }] });
     res.render("admin/sales/index", { sales })
   
 });
 
 
-router.get("/admin/sales/new", async (req, res) => {
+router.get("/admin/sales/new", adminAuth, async (req, res) => {
   const clients = await Client.findAll();
   const products = await Product.findAll();
   res.render("admin/sales/new", { clients, products });
 });
 
-router.post("/admin/sale/save", async (req, res) => {
+router.post("/admin/sale/save", adminAuth, async (req, res) => {
   const { cliente, preco_venda, produtos, quantidades } = req.body;
   const sale = await Sale.create({
     preco_venda,
@@ -73,7 +73,7 @@ router.post("/admin/sale/save", async (req, res) => {
 //     .catch(() => res.redirect('/'))
 // });
 
-router.get("/admin/sale/:id", (req, res) => {
+router.get("/admin/sale/:id", adminAuth, (req, res) => {
   const id = req.params.id;
 
   Sale.findOne({

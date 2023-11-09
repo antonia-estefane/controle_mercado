@@ -10,14 +10,14 @@ INSERT INTO clientes (nome, slug, cpf, endereco, telefone, createdAt, updatedAt)
     ('Cliente 9', 'cliente-9', '999.999.999-99', 'Rua Cliente 9, Cidade 9', '(99) 9999-9999', NOW(), NOW()),
     ('Cliente 10', 'cliente-10', '101.010.101-00', 'Rua Cliente 10, Cidade 10', '(10) 1010-1010', NOW(), NOW());
 
-INSERT INTO produtos (nome_produto, slug, preco_venda, preco_custo, qtd_estoque, categoria, fornecedor, createdAt, updatedAt) VALUES
-    ('Produto 1', 'produto-1', 19.99, 9.99, 100, 'Eletrônicos', 'Fornecedor 1', NOW(), NOW()),
-    ('Produto 2', 'produto-2', 29.99, 14.99, 50, 'Roupas', 'Fornecedor 2', NOW(), NOW()),
-    ('Produto 3', 'produto-3', 49.99, 24.99, 75, 'Móveis', 'Fornecedor 3', NOW(), NOW()),
-    ('Produto 4', 'produto-4', 39.99, 19.99, 120, 'Eletrônicos', 'Fornecedor 4', NOW(), NOW()),
-    ('Produto 5', 'produto-5', 59.99, 29.99, 60, 'Roupas', 'Fornecedor 5', NOW(), NOW()),
-    ('Produto 6', 'produto-6', 69.99, 34.99, 90, 'Móveis', 'Fornecedor 6', NOW(), NOW()),
-    ('Produto 7', 'produto-7', 24.99, 12.99, 80, 'Eletrônicos', 'Fornecedor 7', NOW(), NOW()),
-    ('Produto 8', 'produto-8', 34.99, 16.99, 70, 'Roupas', 'Fornecedor 8', NOW(), NOW()),
-    ('Produto 9', 'produto-9', 44.99, 22.99, 55, 'Móveis', 'Fornecedor 9', NOW(), NOW()),
-    ('Produto 10', 'produto-10', 54.99, 27.99, 95, 'Eletrônicos', 'Fornecedor 10', NOW(), NOW());
+INSERT INTO produtos (nome_produto, slug, preco_venda, preco_custo, qtd_estoque, categoriaId, fornecedor, createdAt, updatedAt) VALUES
+    ('Produto 1', 'produto-1', 19.99, 9.99, 100, '1', 'Fornecedor 1', NOW(), NOW()),
+    ('Produto 2', 'produto-2', 29.99, 14.99, 50, '1', 'Fornecedor 2', NOW(), NOW()),
+    ('Produto 3', 'produto-3', 49.99, 24.99, 75, '1', 'Fornecedor 3', NOW(), NOW()),
+    ('Produto 4', 'produto-4', 39.99, 19.99, 120, '1', 'Fornecedor 4', NOW(), NOW()),
+    ('Produto 5', 'produto-5', 59.99, 29.99, 60, '1', 'Fornecedor 5', NOW(), NOW()),
+    ('Produto 6', 'produto-6', 69.99, 34.99, 90, '1', 'Fornecedor 6', NOW(), NOW()),
+    ('Produto 7', 'produto-7', 24.99, 12.99, 80, '1', 'Fornecedor 7', NOW(), NOW()),
+    ('Produto 8', 'produto-8', 34.99, 16.99, 70, '2', 'Fornecedor 8', NOW(), NOW()),
+    ('Produto 9', 'produto-9', 44.99, 22.99, 55, '2', 'Fornecedor 9', NOW(), NOW()),
+    ('Produto 10', 'produto-10', 54.99, 27.99, 95, '2', 'Fornecedor 10', NOW(), NOW());

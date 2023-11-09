@@ -1,0 +1,41 @@
+<%- include ('../../partials/header') %> 
+<%- include ('../../partials/adminNavBar') %> 
+<div class="container">
+    <h2 class="mb-3">Usuários</h2>
+    <a href="/admin/users/new"  class="btn btn-success mb-3 ">Cadastrar Usuário</a>
+    <table class="table table-striped table-bordered ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.email %></td>
+                    <td>                       
+                    <form method="post" action="" style="display: inline;" onsubmit="confirmar_delecao(event, this)">
+                        <input type="hidden" name="id" value="">
+                        <button class="btn btn-danger">Excluir</button>
+                    </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<script>
+    function confirmar_delecao(event, form) {
+        event.preventDefault()
+        let decisao = confirm("Deseja realmente excluir o usuário?")
+        
+        if(decisao) {
+            form.submit()
+        }
+    }
+</script>
+<%- include ('../../partials/footer') %> 
+

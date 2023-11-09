@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="preco_venda">Preco venda</label>
-          <input type="number" class="form-control" id="preco_venda" name="preco_venda" placeholder="Valor da compra">
+          <input type="number" step="0.01" class="form-control" id="preco_venda" name="preco_venda" placeholder="Valor da compra">
         </div>
         <div class="w-100 d-flex flex-column" id="produtos">
           <div class="d-flex w-100" id="produto">
@@ -29,7 +29,7 @@
                     <%= prod.nome_produto %>
                   </option>
                   <% }) %>
-              </select>
+                </select>
             </div>
             <div class="ms-4">
               <div class="form-group">
@@ -50,8 +50,9 @@
           const produtos = document.getElementById('produtos');
           const duplicate = produto.cloneNode(true);
           produtos.appendChild(duplicate)
-
+          
         });
+
       </script>
     </div>
 

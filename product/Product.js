@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const connection = require('../database/database')
+const Category = require('../categories/Category')
+
 
 const Product = connection.define('produtos', {
     nome_produto: {
@@ -22,10 +24,6 @@ const Product = connection.define('produtos', {
         type: Sequelize.INTEGER,
         allowNull: false
     }, 
-    categoria: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }, 
     fornecedor: {
         type: Sequelize.STRING,
         allowNull: false
@@ -36,5 +34,8 @@ const Product = connection.define('produtos', {
     }
        
 });
+
+Category.hasMany(Product) 
+Product.belongsTo(Category) 
 
 module.exports = Product

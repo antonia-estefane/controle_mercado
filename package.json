@@ -9,10 +9,13 @@
   "author": "Estefane",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "bootstrap-icons": "^1.11.1",
     "date-fns": "^2.30.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mysql2": "^3.6.2",
     "nodemon": "^3.0.1",
     "sequelize": "^6.33.0",

@@ -11,12 +11,12 @@
         <div class="row">
           <div class="col">
             <label for="preco_venda">Preço de venda</label>
-            <input type="number" min="0.1" step="1.0" class="form-control" placeholder="Preço de venda" id="preco_venda"
+            <input type="number"  step="0.01" class="form-control" placeholder="Preço de venda" id="preco_venda"
               name="preco_venda">
           </div>
           <div class="col">
             <label for="preco_custo">Preço de custo</label>
-            <input type="number" min="0.1" step="1.0" class="form-control" placeholder="Preço de custo" id="preco_custo"
+            <input type="number"  step="0.01" class="form-control" placeholder="Preço de custo" id="preco_custo"
               name="preco_custo">
           </div>
         </div>
@@ -27,11 +27,13 @@
           </div>
           <div class="col">
             <label for="categoria">Categoria</label>
-            <!-- <select id="categoria" name="categoria" class="form-control">
-                    <option selected>Escolher...</option>
-                    <option>...</option>
-                </select> -->
-            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="categoria">
+            <select id="categoria" name="categoria" class="form-control">
+                    <option selected>Selecione a categoria do produto</option>
+                    <% categories.forEach(category => { %>
+                    <option value="<%= category.id %>"><%= category.nome %></option>
+                    <% }) %>
+                </select>
+            <!-- <input type="text" class="form-control" id="categoria" name="categoria" placeholder="categoria"> -->
 
           </div>
           <div class="col">

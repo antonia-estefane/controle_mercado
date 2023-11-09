@@ -1,0 +1,50 @@
+<%- include('../../partials/header.ejs') %>
+    <%- include ('../../partials/adminNavBar') %>
+    <div class="container">
+        <form action="/categories/save" method="post">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Defina o título da categoria</label>
+          <input type="text" class="form-control" id="nome" placeholder="Informe a categoria aqui"
+          name="nome">
+        </div>
+        <div class="col">
+          <label for="arquivo">Foto</label>
+          <input type="file" id="arquivo" name="arquivo" accept=".png,.jpg,.jpeg">
+          <input type="hidden" id="foto" name="foto">
+          <div class="progress d-none" id="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+          </div>            
+        </div>    
+    
+          <button type="submit" class="btn btn-success ">Cadastrar</button>
+          <a href="/admin/categories" class="btn btn-danger ">Cancelar</a>
+      </div>
+    </form>
+
+    <script>
+
+      function getFileBase64(file, callback) {
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const base64Photo = e.target.result;
+            callback(base64Photo);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      document.getElementById("arquivo").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        const elemProgress = document.getElementById("progress");
+        elemProgress.classList.remove('d-none');
+        getFileBase64(file, (foto => {
+          elemProgress.classList.add('d-none');
+          const elemFoto = document.getElementById("foto")
+          elemFoto.value = foto;
+        }))
+      })
+
+    </script>
+
+  <%- include('../../partials/footer.ejs') %>
